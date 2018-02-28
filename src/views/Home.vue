@@ -1,6 +1,6 @@
 <template>
     <my-page title="手机归属地查询">
-        <ui-text-field v-model="phone" />
+        <ui-text-field label="手机号码" v-model="phone" />
         <br>
         <ui-raised-button class="btn" label="查询" primary @click="query" />
         <ui-article v-if="result">
@@ -22,7 +22,7 @@
     export default {
         data () {
             return {
-                phone: '15602229283',
+                phone: '',
                 result: null
             }
         },
