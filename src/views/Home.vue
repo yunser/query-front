@@ -28,6 +28,13 @@
         },
         methods: {
             query() {
+                if (!this.phone) {
+                    this.$message({
+                        type: 'danger',
+                        text: '请输入手机号码'
+                    })
+                    return
+                }
                 this.$http.get('/phone?phone=' + this.phone).then(
                     response => {
                         let data = response.data
