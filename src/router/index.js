@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 const Home = resolve => require(['@/views/Home'], resolve)
+const Common = resolve => require(['@/views/Common'], resolve)
 const About = resolve => require(['@/views/About'], resolve)
 
 const Error404 = resolve => require(['@/views/error/Error404'], resolve)
@@ -12,6 +13,10 @@ let routes = [
     {
         path: '/',
         component: Home
+    },
+    {
+        path: '/common',
+        component: Common
     },
     {
         path: '/about',
