@@ -1,5 +1,24 @@
 <template>
     <my-page title="常用电话号码">
+        <div class="tool-box">
+            <div class="search-box">
+                <input class="input" v-model="keyword" placeholder="输入电话号码或关键词查询">
+                <ui-icon-button class="icon" icon="search" @click="search" />
+            </div>
+            <div class="ui-loading" v-if="loading">
+                <ui-circular-progress :size="24"/>
+            </div>
+            <ui-article class="result" v-if="result">
+                <p v-if="!result.length">搜索不到结果</p>
+                <table v-if="result.length">
+                    <tr v-for="item in result">
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.phone }}</td>
+                    </tr>
+                </table>
+                <!-- 查询结果：{{ result }} -->
+            </ui-article>
+        </div>
         <ui-article>
             <table class="tel" cellpadding="0" cellspacing="0">
                 <tbody><tr>
@@ -1769,7 +1788,7 @@
         data () {
             return {
                 loading: false,
-                phone: '',
+                keyword: '119',
                 result: null
             }
         },
@@ -1779,19 +1798,20 @@
                 this.phone = data
                 this.query()
             }
+            // this.result = '火警电话 119'
         },
         methods: {
-            query() {
-                if (!this.phone) {
+            search() {
+                if (!this.keyword) {
                     this.$message({
                         type: 'danger',
-                        text: '请输入手机号码'
+                        text: '请输入电话号码或关键词'
                     })
                     return
                 }
                 this.loading = true
                 this.result = null
-                this.$http.get('/phone?phone=' + this.phone).then(
+                this.$http.get('/common_phones?keyword=' + this.keyword).then(
                     response => {
                         let data = response.data
                         console.log(data)
@@ -1807,7 +1827,7 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
     .btn {
         margin-bottom: 16px;
     }
@@ -1819,5 +1839,22 @@
         height: 40px;
         border-radius: 50%;
         box-shadow: 0 1px 6px rgba(0,0,0,.117647), 0 1px 4px rgba(0,0,0,.117647);
+    }
+    .tool-box {
+        max-width: 320px;
+        margin: 0 auto 24px auto;
+    }
+    .search-box {
+        display: flex;
+        height: 48px;
+        margin-bottom: 16px;
+        box-shadow: 0 1px 6px rgba(0,0,0,.117647), 0 1px 4px rgba(0,0,0,.117647);
+        .input {
+            height: 48px;
+            padding-left: 16px;
+            flex-grow: 1;
+            border: none;
+            outline: none;
+        }
     }
 </style>

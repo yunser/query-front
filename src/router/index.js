@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 const Home = resolve => require(['@/views/Home'], resolve)
+const Check = resolve => require(['@/views/Check'], resolve)
 const Common = resolve => require(['@/views/Common'], resolve)
 const About = resolve => require(['@/views/About'], resolve)
 
@@ -13,6 +14,10 @@ let routes = [
     {
         path: '/',
         component: Home
+    },
+    {
+        path: '/check',
+        component: Check
     },
     {
         path: '/common',

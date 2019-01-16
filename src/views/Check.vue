@@ -1,22 +1,13 @@
 <template>
-    <my-page title="手机归属地查询">
-        <ui-text-field label="手机号码" v-model="phone" />
+    <my-page title="骚扰电话查询">
+        <ui-text-field label="电话号码（固话或手机）" v-model="phone" />
         <br>
         <ui-raised-button class="btn" label="查询" primary @click="query" />
         <div class="ui-loading" v-if="loading">
             <ui-circular-progress :size="24"/>
         </div>
         <ui-article v-if="result">
-            <table>
-                <tr>
-                    <th>卡类型</th>
-                    <td>{{ result.company }} {{ result.cardtype }}</td>
-                </tr>
-                <tr>
-                    <th>归属地</th>
-                    <td>{{ result.province }} · {{ result.city }}</td>
-                </tr>
-            </table>
+            <p v-html="result"></p>
         </ui-article>
     </my-page>
 </template>
@@ -26,7 +17,7 @@
         data () {
             return {
                 loading: false,
-                phone: '',
+                phone: '01053355120',
                 result: null
             }
         },
@@ -42,18 +33,18 @@
                 if (!this.phone) {
                     this.$message({
                         type: 'danger',
-                        text: '请输入手机号码'
+                        text: '请输入电话号码'
                     })
                     return
                 }
                 this.loading = true
                 this.result = null
-                this.$http.get('/phone?phone=' + this.phone).then(
+                this.$http.get('/phone/check?phone=' + this.phone).then(
                     response => {
                         let data = response.data
                         console.log(data)
                         this.loading = false
-                        this.result = data
+                        this.result = data.data || data.info
                     },
                     response => {
                         this.loading = false
@@ -68,4 +59,10 @@
     .btn {
         margin-bottom: 16px;
     }
+</style>
+<style>
+.label-warning {
+    color: #f0ad4e;
+    font-weight: bold;
+}
 </style>
