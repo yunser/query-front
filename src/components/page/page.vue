@@ -1,22 +1,31 @@
 <template>
-    <ui-page :title="title || page.title" ref="page">
+    <ui-page :title="title || page.title" :page="page" ref="page">
         <div slot="drawer">
             <div class="header">
                 <img class="logo" src="/static/img/life.svg">
             </div>
             <ui-list @itemClick="toggle()">
-                <ui-list-item title="首页" href="https://life.yunser.com/">
-                    <ui-icon slot="left" value="grade"/>
-                </ui-list-item>
-                <!-- <ui-list-item title="手机号码归属地查询" to="/">
+                <!-- <ui-list-item title="首页" href="/">
+                    <ui-icon slot="left" value="home"/>
+                </ui-list-item> -->
+                <ui-list-item title="号码归属地查询" to="/search">
                     <ui-icon slot="left" value="grade"/>
                 </ui-list-item>
                 <ui-list-item title="常用电话号码" to="/common">
                     <ui-icon slot="left" value="grade"/>
-                </ui-list-item> -->
-                <!-- <ui-list-item title="关于" to="/about">
+                </ui-list-item>
+                <ui-list-item title="骚扰电话查询" to="/check">
                     <ui-icon slot="left" value="grade"/>
-                </ui-list-item> -->
+                </ui-list-item>
+                <ui-list-item title="手机号码生成" to="/generation">
+                    <ui-icon slot="left" value="grade"/>
+                </ui-list-item>
+                <ui-list-item title="生活" href="https://life.yunser.com/" target="_blank">
+                    <ui-icon slot="left" value="link"/>
+                </ui-list-item>
+                <ui-list-item title="关于" href="https://project.yunser.com/products/a1cd0d909a1d11e9a1ab97c6b9c075bb" target="_blank">
+                    <ui-icon slot="left" value="info"/>
+                </ui-list-item>
             </ui-list>
         </div>
         <slot></slot>

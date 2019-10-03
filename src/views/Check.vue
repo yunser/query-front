@@ -1,14 +1,16 @@
 <template>
     <my-page title="骚扰电话查询">
-        <ui-text-field label="电话号码（固话或手机）" v-model="phone" />
-        <br>
-        <ui-raised-button class="btn" label="查询" primary @click="query" />
-        <div class="ui-loading" v-if="loading">
-            <ui-circular-progress :size="24"/>
+        <div class="common-container container">
+            <ui-text-field label="电话号码（固话或手机）" v-model="phone" />
+            <br>
+            <ui-raised-button class="btn" label="查询" primary @click="query" />
+            <div class="ui-loading" v-if="loading">
+                <ui-circular-progress :size="24"/>
+            </div>
+            <ui-article v-if="result">
+                <p v-html="result"></p>
+            </ui-article>
         </div>
-        <ui-article v-if="result">
-            <p v-html="result"></p>
-        </ui-article>
     </my-page>
 </template>
 
