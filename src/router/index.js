@@ -1,25 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-const Home = resolve => require(['@/views/Home'], resolve)
 const Check = resolve => require(['@/views/Check'], resolve)
 const Common = resolve => require(['@/views/Common'], resolve)
 const Generation = resolve => require(['@/views/Generation'], resolve)
-
 const Error404 = resolve => require(['@/views/error/Error404'], resolve)
 
 Vue.use(Router)
 
 let routes = [
-    {
-        path: '/',
-        redirect: '/search'
-        // component: Home
-    },
-    {
-        path: '/search',
-        component: Home
-    },
+    // {
+    //     path: '/',
+    //     redirect: '/search'
+    //     // component: Home
+    // },
+    { path: '/', component: resolve => require(['@/views/Home'], resolve) },
+    { path: '/search', component: resolve => require(['@/views/Search'], resolve) },
     {
         path: '/check',
         component: Check
